@@ -17,9 +17,12 @@ def ensure_homebrew():
 	if not program_exists('brew'):
 		run('/usr/bin/ruby -e "$(/usr/bin/curl -fksSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"')
 
-def ensure_package(name):
+def ensure_package(name, install_args=""):
 	find_package_management_program()
-	run('%s %s' % (env.install_package_command, name))
+	cmd = '%s %s' % (env.install_package_command, name)
+	if install_args:
+		cmd += ' ' + install_args
+	run(cmd)
 
 def ensure_python_pkg(name):
 	if not program_exists('pip'):
