@@ -38,3 +38,12 @@ def ensure_python_pkg(name):
             ensure_package('python-pip')
     sudo('pip install %s' % name)
 
+def ensure_nodejs_pkg(name):
+    if not program_exists('npm'):
+        ensure_package('nodejs')
+    sudo('npm install -g %s' % name)
+
+def ensure_ruby_pkg(name):
+    if not program_exists('gem'):
+        ensure_package('ruby')
+    sudo('gem install %s' % name)
